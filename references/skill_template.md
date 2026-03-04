@@ -1,297 +1,297 @@
-# Skill模板参考
+# Skill Template Reference
 
-本文档提供创建高质量Skill的模板和最佳实践。
+This document provides templates and best practices for creating high-quality Skills.
 
-## Skill基本结构
+## Basic Skill Structure
 
 ```
 skill-name/
-├── SKILL.md              # 必需：Skill定义和使用说明
-├── knowledge/            # 知识库目录（可选）
-│   ├── index.json       # 知识索引
-│   └── chunks/          # 知识分块
-├── scripts/             # 脚本目录（可选）
-│   └── query.py         # 查询脚本
-└── assets/              # 资源文件（可选）
+├── SKILL.md              # Required: Skill definition and usage instructions
+├── knowledge/            # Knowledge base directory (optional)
+│   ├── index.json       # Knowledge index
+│   └── chunks/          # Knowledge chunks
+├── scripts/             # Scripts directory (optional)
+│   └── query.py         # Query script
+└── assets/              # Resource files (optional)
 ```
 
-## SKILL.md 模板
+## SKILL.md Template
 
-### 基础模板
+### Basic Template
 
 ```markdown
 ---
 name: skill-identifier
 description: |
-  一句话描述skill的核心功能。
-  什么时候应该使用这个skill（触发条件）。
-  适用于什么场景。
+  One-sentence description of the skill's core functionality.
+  When should this skill be used (trigger conditions).
+  Applicable scenarios.
 ---
 
-# Skill名称
+# Skill Name
 
-简要介绍skill的用途和价值。
+Brief introduction to the skill's purpose and value.
 
-## 使用场景
+## Usage Scenarios
 
-- 场景1：...
-- 场景2：...
-- 场景3：...
+- Scenario 1: ...
+- Scenario 2: ...
+- Scenario 3: ...
 
-## 工作流程
+## Workflow
 
-### 步骤1：...
-详细说明...
+### Step 1: ...
+Detailed explanation...
 
-### 步骤2：...
-详细说明...
+### Step 2: ...
+Detailed explanation...
 
-## 详细指南
+## Detailed Guide
 
-### 子任务A
+### Subtask A
 ...
 
-### 子任务B
+### Subtask B
 ...
 
-## 示例
+## Examples
 
-### 示例1：...
-输入：...
-输出：...
+### Example 1: ...
+Input: ...
+Output: ...
 
-## 注意事项
+## Notes
 
-- 注意点1
-- 注意点2
+- Note 1
+- Note 2
 
-## 故障排除
+## Troubleshooting
 
-**问题**：...
-**解决**：...
+**Problem**: ...
+**Solution**: ...
 ```
 
-### 知识库Skill模板
+### Knowledge Base Skill Template
 
 ```markdown
 ---
 name: {document}-assistant
 description: |
-  基于{文档名称}内容提供问答服务。
-  当用户询问关于{主题}的问题时，使用此skill查询知识库。
-  支持{功能1}、{功能2}、{功能3}。
+  Provide Q&A services based on {document} content.
+  When users ask questions about {topic}, use this skill to query the knowledge base.
+  Supports {feature1}, {feature2}, {feature3}.
 ---
 
-# {文档名称} 问答助手
+# {Document} Q&A Assistant
 
-## 知识库概述
+## Knowledge Base Overview
 
-- **文档来源**: {source}
-- **分块数量**: {n} 个知识块
-- **涵盖主题**: {topics}
+- **Document Source**: {source}
+- **Number of Chunks**: {n} knowledge chunks
+- **Topics Covered**: {topics}
 
-## 使用方法
+## Usage Instructions
 
-### 处理查询
+### Processing Queries
 
-1. **理解问题**
-   - 提取关键概念
-   - 确定查询意图
+1. **Understand the Question**
+   - Extract key concepts
+   - Determine query intent
 
-2. **检索知识**
+2. **Retrieve Knowledge**
    ```python
    from scripts.query import query_knowledge
    results = query_knowledge(query, top_k=5)
    ```
 
-3. **综合回答**
-   - 整合相关信息
-   - 标注信息来源
-   - 保持客观准确
+3. **Synthesize Answer**
+   - Integrate relevant information
+   - Cite information sources
+   - Remain objective and accurate
 
-### 回答格式
+### Response Format
 
-**标准格式**：
+**Standard Format**:
 ```
-根据文档内容：
+According to the document content:
 
-[回答主体]
+[Main answer body]
 
-参考来源：
-- 第X页，{章节名称}
-- 第Y页，{相关内容}
-```
-
-**无相关信息时**：
-```
-根据本文档的知识库，没有找到关于"{主题}"的具体信息。
-
-文档主要涵盖：{主题列表}
+Reference sources:
+- Page X, {section name}
+- Page Y, {related content}
 ```
 
-## 知识范围
+**When no relevant information exists**:
+```
+According to this document's knowledge base, no specific information about "{topic}" was found.
 
-本文档包含以下主题：
-1. {主题1}
-2. {主题2}
-3. {主题3}
-
-## 限制
-
-- 仅基于本文档内容回答
-- 不推断文档外的信息
-- 不保证实时性
-
-## 示例
-
-### 示例1：{场景1}
-**用户**：...
-**处理**：...
-**回答**：...
+The document mainly covers: {topic list}
 ```
 
-## 描述优化技巧
+## Knowledge Scope
 
-### 触发词设计
+This document contains the following topics:
+1. {topic1}
+2. {topic2}
+3. {topic3}
 
-好的描述应该包含：
+## Limitations
 
-1. **功能动词**
-   - 提取、分析、生成、查询、转换
+- Only answer based on this document's content
+- Do not infer information outside the document
+- No guarantee of real-time updates
 
-2. **领域关键词**
-   - PDF、文档、知识库、问答
+## Examples
 
-3. **触发场景**
-   - 当用户需要...时
-   - 处理...类型的请求
-
-### 示例对比
-
-**差**：
-```
-一个PDF处理工具。
+### Example 1: {scenario1}
+**User**: ...
+**Processing**: ...
+**Answer**: ...
 ```
 
-**好**：
+## Description Optimization Tips
+
+### Trigger Word Design
+
+A good description should include:
+
+1. **Action Verbs**
+   - extract, analyze, generate, query, transform
+
+2. **Domain Keywords**
+   - PDF, document, knowledge base, Q&A
+
+3. **Trigger Scenarios**
+   - When users need...
+   - Process requests of type...
+
+### Example Comparison
+
+**Poor**:
 ```
-自动提取PDF文档内容并构建可查询的知识库。
-当用户需要处理PDF文档、提取文档内容、将文档转化为可查询的知识库、
-或基于PDF内容提供问答服务时，必须使用此skill。
+A PDF processing tool.
 ```
 
-## 元数据字段
+**Good**:
+```
+Automatically extract content from PDF documents and build searchable knowledge bases.
+When users need to process PDF documents, extract document content, transform documents into searchable knowledge bases,
+or provide Q&A services based on PDF content, this skill must be used.
+```
 
-### 必需字段
+## Metadata Fields
+
+### Required Fields
 
 ```yaml
-name: skill-name           # 唯一标识，小写+连字符
-description: |             # 触发描述，200-500字
-  详细描述skill的功能和触发条件
+name: skill-name           # Unique identifier, lowercase + hyphens
+description: |             # Trigger description, 200-500 words
+  Detailed description of skill functionality and trigger conditions
 ```
 
-### 可选字段
+### Optional Fields
 
 ```yaml
-version: 1.0.0            # 版本号
-author: Your Name         # 作者
-compatibility: |          # 兼容性说明
+version: 1.0.0            # Version number
+author: Your Name         # Author
+compatibility: |          # Compatibility notes
   - Python 3.8+
-  - 依赖包列表
-tags:                     # 标签
+  - Dependency list
+tags:                     # Tags
   - pdf
   - knowledge-base
   - extraction
 ```
 
-## 内容组织模式
+## Content Organization Patterns
 
-### 模式1：步骤导向
+### Pattern 1: Step-Oriented
 
-适合有明确流程的skill：
+Suitable for skills with clear workflows:
 
 ```markdown
-## 工作流程
+## Workflow
 
-### 步骤1：准备
+### Step 1: Preparation
 ...
 
-### 步骤2：执行
+### Step 2: Execution
 ...
 
-### 步骤3：验证
+### Step 3: Verification
 ...
 ```
 
-### 模式2：场景导向
+### Pattern 2: Scenario-Oriented
 
-适合多场景适用的skill：
+Suitable for multi-scenario skills:
 
 ```markdown
-## 使用场景
+## Usage Scenarios
 
-### 场景A：...
-详细说明...
+### Scenario A: ...
+Detailed explanation...
 
-### 场景B：...
-详细说明...
+### Scenario B: ...
+Detailed explanation...
 ```
 
-### 模式3：API导向
+### Pattern 3: API-Oriented
 
-适合提供工具的skill：
+Suitable for tool-providing skills:
 
 ```markdown
-## 接口说明
+## Interface Documentation
 
 ### query_knowledge(query, top_k)
-参数：...
-返回：...
-示例：...
+Parameters: ...
+Returns: ...
+Example: ...
 ```
 
-## 常见错误
+## Common Mistakes
 
-### ❌ 错误1：描述过于笼统
+### ❌ Mistake 1: Description Too General
 
 ```markdown
-# 差
-description: 处理PDF文件
+# Poor
+description: Process PDF files
 
-# 好
+# Good
 description: |
-  自动提取PDF文档中的文本和表格内容，
-  特别适用于处理产品手册、学术论文、政策法规等文档。
+  Automatically extract text and table content from PDF documents,
+  especially suitable for processing product manuals, academic papers, policy documents, etc.
 ```
 
-### ❌ 错误2：缺乏触发条件
+### ❌ Mistake 2: Missing Trigger Conditions
 
 ```markdown
-# 差
-description: 这个skill可以查询知识库
+# Poor
+description: This skill can query knowledge bases
 
-# 好
+# Good
 description: |
-  当用户询问与本文档相关的问题时，使用此skill查询知识库并提供准确回答。
-  特别适用于基于文档内容的问答场景。
+  When users ask questions related to this document, use this skill to query the knowledge base and provide accurate answers.
+  Especially suitable for document-based Q&A scenarios.
 ```
 
-### ❌ 错误3：说明过于技术化
+### ❌ Mistake 3: Overly Technical Description
 
 ```markdown
-# 差
-使用TF-IDF算法进行向量化检索...
+# Poor
+Use TF-IDF algorithm for vectorized retrieval...
 
-# 好
-输入问题，系统会自动检索相关知识并给出答案...
+# Good
+Enter questions, and the system will automatically retrieve relevant knowledge and provide answers...
 ```
 
-## 质量检查清单
+## Quality Checklist
 
-- [ ] 名称唯一且有意义
-- [ ] 描述包含触发条件
-- [ ] 有清晰的使用示例
-- [ ] 包含故障排除指南
-- [ ] 说明了限制和边界
-- [ ] 格式规范（Markdown）
-- [ ] 无拼写和语法错误
+- [ ] Name is unique and meaningful
+- [ ] Description contains trigger conditions
+- [ ] Clear usage examples provided
+- [ ] Troubleshooting guide included
+- [ ] Limitations and boundaries explained
+- [ ] Formatting standards met (Markdown)
+- [ ] No spelling or grammar errors

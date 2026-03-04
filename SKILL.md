@@ -1,94 +1,94 @@
 ---
 name: pdf-knowledge-extractor
 description: |
-  自动提取PDF文档内容并构建可复用的知识库skill。
-  当用户需要：处理PDF文档、提取文档内容、将文档转化为可查询的知识库、
-  基于PDF内容创建skill、文档内容分析或问答时，必须使用此skill。
-  支持批量处理、结构化提取、智能分块和知识库持久化。
+  Automatically extract content from PDF documents and build reusable knowledge base skills.
+  When users need to: process PDF documents, extract document content, transform documents into queryable knowledge bases,
+  create skills based on PDF content, or perform document content analysis and Q&A, this skill MUST be used.
+  Supports batch processing, structured extraction, intelligent chunking, and knowledge base persistence.
 compatibility: |
-  - 需要Python 3.8+
-  - 依赖：PyPDF2/pdfplumber, openpyxl (表格提取)
-  - 可选：pdf2image, pytesseract (扫描件OCR)
+  - Requires Python 3.8+
+  - Dependencies: PyPDF2/pdfplumber, openpyxl (table extraction)
+  - Optional: pdf2image, pytesseract (OCR for scanned documents)
 ---
 
-# PDF知识提取器 (PDF Knowledge Extractor)
+# PDF Knowledge Extractor
 
-这个skill帮助你将PDF文档自动转化为结构化的知识库，并可以基于此创建可复用的skill来提供文档相关的服务或指导。
+This skill helps you automatically transform PDF documents into structured knowledge bases and create reusable skills to provide document-related services or guidance.
 
-## 核心功能
+## Core Features
 
-1. **文档内容提取**：从PDF中提取文本、表格、结构信息
-2. **智能分块处理**：将长文档切分为语义连贯的知识块
-3. **知识库构建**：将提取的内容组织为可查询的结构
-4. **Skill生成**：基于文档内容自动生成可复用的skill
+1. **Document Content Extraction**: Extract text, tables, and structural information from PDFs
+2. **Intelligent Chunking**: Split long documents into semantically coherent knowledge chunks
+3. **Knowledge Base Building**: Organize extracted content into queryable structures
+4. **Skill Generation**: Automatically generate reusable skills based on document content
 
-## 使用场景
+## Usage Scenarios
 
-- 处理产品手册/用户指南，创建问答机器人
-- 提取论文/报告内容，构建研究知识库
-- 处理政策法规文档，创建合规指导系统
-- 整理培训材料，构建学习助手
+- Process product manuals/user guides to create Q&A bots
+- Extract paper/report content to build research knowledge bases
+- Process policy/regulatory documents to create compliance guidance systems
+- Organize training materials to build learning assistants
 
-## 工作流程
+## Workflow
 
-### 阶段一：文档提取
+### Phase 1: Document Extraction
 
-当用户提供PDF文档时：
+When a user provides a PDF document:
 
-1. **识别文档类型**
-   - 扫描件（需要OCR）vs 原生PDF
-   - 文本密集型 vs 表格密集型
-   - 单文档 vs 批量文档
+1. **Identify Document Type**
+   - Scanned (requires OCR) vs Native PDF
+   - Text-heavy vs Table-heavy
+   - Single document vs Batch documents
 
-2. **提取内容**
-   - 使用合适的工具提取文本
-   - 保留文档结构（标题、段落、列表）
-   - 提取表格数据（如有）
+2. **Extract Content**
+   - Use appropriate tools to extract text
+   - Preserve document structure (headings, paragraphs, lists)
+   - Extract table data (if present)
 
-3. **内容验证**
-   - 检查提取质量
-   - 处理乱码或缺失内容
-   - 对扫描件进行OCR优化
+3. **Content Validation**
+   - Check extraction quality
+   - Handle garbled or missing content
+   - Optimize OCR for scanned documents
 
-### 阶段二：知识结构化
+### Phase 2: Knowledge Structuring
 
-1. **语义分块**
-   - 按章节/主题分割文档
-   - 保持上下文连贯性
-   - 生成内容摘要
+1. **Semantic Chunking**
+   - Split documents by chapters/topics
+   - Maintain contextual coherence
+   - Generate content summaries
 
-2. **元数据标注**
-   - 文档类型、来源、日期
-   - 关键词标签
-   - 重要性评级
+2. **Metadata Tagging**
+   - Document type, source, date
+   - Keyword tags
+   - Importance ratings
 
-3. **建立索引**
-   - 创建可搜索的索引结构
-   - 维护段落间关系
+3. **Build Index**
+   - Create searchable index structures
+   - Maintain relationships between paragraphs
 
-### 阶段三：Skill生成
+### Phase 3: Skill Generation
 
-基于提取的知识，生成一个可复用的skill：
+Based on extracted knowledge, generate a reusable skill:
 
 ```
 pdf-knowledge-base/
-├── SKILL.md              # Skill定义和使用指南
+├── SKILL.md              # Skill definition and usage guide
 ├── knowledge/
-│   ├── index.json        # 知识索引
-│   ├── chunks/           # 分块内容
-│   └── metadata.json     # 文档元数据
+│   ├── index.json        # Knowledge index
+│   ├── chunks/           # Chunked content
+│   └── metadata.json     # Document metadata
 └── scripts/
-    ├── query.py          # 查询接口
-    └── extract.py        # 提取工具
+    ├── query.py          # Query interface
+    └── extract.py        # Extraction tool
 ```
 
-## 详细操作指南
+## Detailed Operation Guide
 
-### 1. 提取PDF内容
+### 1. Extract PDF Content
 
-**原生PDF文本提取：**
+**Native PDF text extraction:**
 
-使用 `scripts/extract.py` 工具：
+Use the `scripts/extract.py` tool:
 
 ```bash
 python scripts/extract.py \
@@ -98,16 +98,16 @@ python scripts/extract.py \
   --extract-tables
 ```
 
-参数说明：
-- `--format structured`: 保留文档结构（标题层级）
-- `--extract-tables`: 提取表格为结构化数据
-- `--ocr`: 对扫描件启用OCR
+Parameters:
+- `--format structured`: Preserve document structure (heading hierarchy)
+- `--extract-tables`: Extract tables as structured data
+- `--ocr`: Enable OCR for scanned documents
 
-**输出格式：**
+**Output format:**
 ```json
 {
   "document_info": {
-    "title": "文档标题",
+    "title": "Document Title",
     "pages": 42,
     "extracted_at": "2024-01-15T10:30:00Z"
   },
@@ -115,27 +115,27 @@ python scripts/extract.py \
     {
       "type": "heading",
       "level": 1,
-      "text": "第一章 概述",
+      "text": "Chapter 1 Overview",
       "page": 1
     },
     {
       "type": "paragraph",
-      "text": "这是正文内容...",
+      "text": "This is the main content...",
       "page": 1
     },
     {
       "type": "table",
-      "headers": ["列1", "列2"],
-      "rows": [["数据1", "数据2"]],
+      "headers": ["Column 1", "Column 2"],
+      "rows": [["Data 1", "Data 2"]],
       "page": 3
     }
   ]
 }
 ```
 
-### 2. 创建知识分块
+### 2. Create Knowledge Chunks
 
-运行分块脚本：
+Run the chunking script:
 
 ```bash
 python scripts/chunk.py \
@@ -145,62 +145,62 @@ python scripts/chunk.py \
   --overlap 200
 ```
 
-分块策略：
-- **按章节分块**：优先在标题边界处分割
-- **滑动窗口**：保持上下文重叠（overlap）
-- **语义完整**：避免在句子中间截断
+Chunking strategies:
+- **By chapter**: Split at heading boundaries when possible
+- **Sliding window**: Maintain context overlap
+- **Semantic integrity**: Avoid cutting in the middle of sentences
 
-### 3. 构建知识库Skill
+### 3. Build Knowledge Base Skill
 
-使用 `scripts/generate_skill.py`：
+Use `scripts/generate_skill.py`:
 
 ```bash
 python scripts/generate_skill.py \
   --knowledge-dir "knowledge/" \
   --output "my-document-skill/" \
   --skill-name "product-manual-assistant" \
-  --description "基于产品手册的问答助手"
+  --description "Q&A assistant based on product manual"
 ```
 
-生成的Skill包含：
+Generated Skill includes:
 
-**SKILL.md 模板：**
+**SKILL.md Template:**
 ```markdown
 ---
 name: product-manual-assistant
 description: |
-  基于[文档名称]内容提供问答服务。
-  当用户询问关于[主题]的问题时，使用此skill查询知识库并给出准确回答。
+  Provide Q&A services based on [document name] content.
+  When users ask questions about [topic], use this skill to query the knowledge base and provide accurate answers.
 ---
 
-## 知识库查询
+## Knowledge Base Query
 
-当用户提出问题时：
+When a user asks a question:
 
-1. 分析问题关键词
-2. 查询知识库中相关的chunks
-3. 综合信息给出回答
-4. 标注信息来源（页码/章节）
+1. Analyze question keywords
+2. Query relevant chunks from the knowledge base
+3. Synthesize information to provide an answer
+4. Cite information sources (page/chapter)
 
-## 回答格式
+## Response Format
 
-- 基于文档内容的直接回答
-- 引用来源：[第X页，Y章节]
-- 如文档中未提及，明确说明
+- Direct answer based on document content
+- Cite source: [Page X, Chapter Y]
+- If not mentioned in the document, clearly state so
 ```
 
-### 4. 使用生成的Skill
+### 4. Use the Generated Skill
 
-生成的skill可以：
-- 独立使用：直接调用查询接口
-- 整合到系统：作为RAG（检索增强生成）的知识源
-- 持续扩展：添加更多相关文档
+The generated skill can be:
+- Used independently: Directly call the query interface
+- Integrated into systems: Serve as a knowledge source for RAG (Retrieval-Augmented Generation)
+- Continuously expanded: Add more related documents
 
-## 高级功能
+## Advanced Features
 
-### 批量处理
+### Batch Processing
 
-处理多个PDF文件：
+Process multiple PDF files:
 
 ```bash
 python scripts/batch_process.py \
@@ -210,9 +210,9 @@ python scripts/batch_process.py \
   --parallel 4
 ```
 
-### 增量更新
+### Incremental Update
 
-当文档更新时：
+When documents are updated:
 
 ```bash
 python scripts/update_knowledge.py \
@@ -221,99 +221,99 @@ python scripts/update_knowledge.py \
   --diff-mode
 ```
 
-### 查询接口
+### Query Interface
 
-在代码中使用知识库：
+Use the knowledge base in code:
 
 ```python
 from scripts.query import KnowledgeQuery
 
 kb = KnowledgeQuery("knowledge/")
-results = kb.search("如何安装软件？", top_k=5)
+results = kb.search("How to install software?", top_k=5)
 
 for result in results:
-    print(f"[第{result.page}页] {result.text}")
+    print(f"[Page {result.page}] {result.text}")
 ```
 
-## 最佳实践
+## Best Practices
 
-1. **提取前检查**
-   - 确认PDF不是纯图片（扫描件）
-   - 检查文档权限（是否有复制限制）
+1. **Pre-extraction Checks**
+   - Confirm PDF is not a pure image (scanned)
+   - Check document permissions (any copy restrictions)
 
-2. **分块策略**
-   - 技术文档：按章节分块，chunk-size 1500-2000
-   - 论文：按段落分块，chunk-size 500-800
-   - 手册：按功能模块分块
+2. **Chunking Strategy**
+   - Technical documents: By chapter, chunk-size 1500-2000
+   - Papers: By paragraph, chunk-size 500-800
+   - Manuals: By functional module
 
-3. **质量保证**
-   - 提取后抽查关键页面
-   - 验证表格数据完整性
-   - 检查特殊字符/公式处理
+3. **Quality Assurance**
+   - Spot-check key pages after extraction
+   - Validate table data integrity
+   - Check special character/formula handling
 
-4. **Skill优化**
-   - 根据常见问题优化检索策略
-   - 添加同义词词典提升召回率
-   - 定期更新知识库索引
+4. **Skill Optimization**
+   - Optimize retrieval strategy based on common questions
+   - Add synonym dictionaries to improve recall
+   - Regularly update knowledge base index
 
-## 故障排除
+## Troubleshooting
 
-**问题：提取的文本乱码**
-- 原因：PDF编码问题或使用了非标准字体
-- 解决：尝试 `--ocr` 模式重新提取
+**Problem: Extracted text is garbled**
+- Cause: PDF encoding issues or use of non-standard fonts
+- Solution: Try `--ocr` mode for re-extraction
 
-**问题：表格提取不完整**
-- 原因：复杂表格布局或合并单元格
-- 解决：使用 `--extract-tables=advanced` 启用高级表格识别
+**Problem: Table extraction incomplete**
+- Cause: Complex table layouts or merged cells
+- Solution: Use `--extract-tables=advanced` to enable advanced table recognition
 
-**问题：生成的skill查询不准确**
-- 原因：分块大小不合适或索引质量低
-- 解决：调整chunk-size，重新生成索引
+**Problem: Generated skill queries are inaccurate**
+- Cause: Inappropriate chunk size or low index quality
+- Solution: Adjust chunk-size and regenerate index
 
-## 示例
+## Examples
 
-### 示例1：产品手册助手
+### Example 1: Product Manual Assistant
 
-输入：产品用户手册PDF（50页）
+Input: Product user manual PDF (50 pages)
 
 ```bash
-# 1. 提取内容
+# 1. Extract content
 python scripts/extract.py --input "product_manual.pdf" --output "product_kb/"
 
-# 2. 分块处理
+# 2. Chunk processing
 python scripts/chunk.py --input "product_kb/" --chunk-size 1500
 
-# 3. 生成skill
+# 3. Generate skill
 python scripts/generate_skill.py \
   --knowledge-dir "product_kb/" \
   --skill-name "product-qabot" \
-  --description "产品使用问题问答助手"
+  --description "Q&A assistant for product usage questions"
 ```
 
-使用生成的skill：
-- 用户问："如何重置设备？"
-- Skill查询知识库 -> 找到相关章节
-- 回答："根据用户手册第12页'故障排除'章节，重置设备的步骤是..."
+Using the generated skill:
+- User asks: "How to reset the device?"
+- Skill queries knowledge base -> Finds relevant chapters
+- Answer: "According to page 12 of the user manual in the 'Troubleshooting' chapter, the steps to reset the device are..."
 
-### 示例2：法规合规指南
+### Example 2: Regulatory Compliance Guide
 
-输入：多项政策法规PDF文档
+Input: Multiple policy/regulatory PDF documents
 
 ```bash
-# 批量处理
+# Batch processing
 python scripts/batch_process.py \
   --input-dir "regulations/" \
   --output "compliance_kb/"
 
-# 生成合规查询skill
+# Generate compliance query skill
 python scripts/generate_skill.py \
   --knowledge-dir "compliance_kb/" \
   --skill-name "compliance-advisor" \
-  --description "法规合规性查询与指导"
+  --description "Regulatory compliance query and guidance"
 ```
 
-## 参考
+## References
 
-- `references/extraction_guide.md`: 详细提取技术说明
-- `references/chunking_strategies.md`: 分块策略深入解析
-- `references/skill_template.md`: Skill模板参考
+- `references/extraction_guide.md`: Detailed extraction technical guide
+- `references/chunking_strategies.md`: In-depth chunking strategy analysis
+- `references/skill_template.md`: Skill template reference
