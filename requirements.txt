@@ -1,0 +1,14 @@
+# 核心依赖
+PyPDF2>=3.0.0
+pdfplumber>=0.10.0
+
+# OCR支持（可选）
+pdf2image>=1.16.0
+pytesseract>=0.3.10
+Pillow>=9.0.0
+
+# 数据处理
+openpyxl>=3.1.0
+
+# 工具
+python-dateutil>=2.8.0

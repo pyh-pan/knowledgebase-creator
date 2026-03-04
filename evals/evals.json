@@ -1,0 +1,33 @@
+{
+  "skill_name": "pdf-knowledge-extractor",
+  "evals": [
+    {
+      "id": 1,
+      "name": "提取原生PDF",
+      "prompt": "我有一个产品手册PDF（50页），想要提取内容并创建一个问答助手。请帮我处理这个文档。",
+      "expected_output": "使用extract.py提取内容，然后用chunk.py分块，最后生成skill",
+      "files": ["sample_manual.pdf"]
+    },
+    {
+      "id": 2,
+      "name": "批量处理PDF",
+      "prompt": "我有一个文件夹包含10份政策法规PDF，想要批量处理并整合为一个合规知识库。",
+      "expected_output": "使用batch_process.py并行处理所有PDF，然后整合为一个skill",
+      "files": ["regulations_folder/"]
+    },
+    {
+      "id": 3,
+      "name": "OCR扫描件",
+      "prompt": "这份PDF是扫描件，需要OCR提取文字内容。请帮我处理并生成可查询的知识库。",
+      "expected_output": "使用extract.py --ocr模式提取，然后正常分块和生成skill",
+      "files": ["scanned_document.pdf"]
+    },
+    {
+      "id": 4,
+      "name": "增量更新",
+      "prompt": "我之前已经创建了知识库，现在有了新的文档版本，想要更新知识库。",
+      "expected_output": "使用update_knowledge.py进行增量更新，保留原有内容并添加新内容",
+      "files": ["knowledge_base/", "document_v2.pdf"]
+    }
+  ]
+}
