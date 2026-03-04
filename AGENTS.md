@@ -1,83 +1,85 @@
-# Project Context
+# 项目上下文
 
-## Project Overview
+## 项目概述
 
-This is a PDF Knowledge Extractor skill that automatically extracts content from PDF documents and builds reusable knowledge base skills. The project was created to transform PDF documents into structured, queryable knowledge bases.
+这是一个 PDF 知识提取器 skill，用于自动从 PDF 文档中提取内容并构建可复用的知识库 skill。该项目旨在将 PDF 文档转换为结构化、可查询的知识库。
 
-## Translation Requirement
+## 翻译要求
 
-**IMPORTANT**: All project documentation must be in **English only**. This includes:
+**重要**：所有项目文档必须使用**英文**。这包括：
 - SKILL.md
 - README.md
-- All files in references/ directory
-- Code comments in scripts
-- Documentation files
-- Test cases
+- references/ 目录中的所有文件
+- 脚本中的代码注释
+- 文档文件
+- 测试用例
 
-The original Chinese content has been translated to English and should remain in English for all future updates.
+**例外**：只有 AGENTS.md 这个文件可以使用中文，用于记录项目上下文和这条翻译要求。
 
-## Project Structure
+原始中文内容已翻译为英文，所有未来的更新都应保持英文。
+
+## 项目结构
 
 ```
 pdf-knowledge-skill/
-├── SKILL.md                    # Main skill definition (for Claude)
-├── README.md                   # Project documentation
-├── requirements.txt            # Python dependencies
-├── AGENTS.md                   # This file - project context
-├── scripts/                    # Core scripts
-│   ├── extract.py             # PDF content extraction
-│   ├── chunk.py               # Knowledge chunking
-│   ├── generate_skill.py      # Skill generation
-│   ├── batch_process.py       # Batch processing
-│   └── update_knowledge.py    # Incremental updates
-├── references/                 # Reference documentation
-│   ├── extraction_guide.md    # PDF extraction guide
-│   ├── chunking_strategies.md # Chunking strategies
-│   └── skill_template.md      # Skill templates
-├── assets/                     # Resource files
-└── evals/                      # Test cases
+├── SKILL.md                    # 主 skill 定义（用于 Claude）
+├── README.md                   # 项目文档
+├── requirements.txt            # Python 依赖
+├── AGENTS.md                   # 本文件 - 项目上下文（唯一可使用中文的文件）
+├── scripts/                    # 核心脚本
+│   ├── extract.py             # PDF 内容提取
+│   ├── chunk.py               # 知识分块
+│   ├── generate_skill.py      # Skill 生成
+│   ├── batch_process.py       # 批量处理
+│   └── update_knowledge.py    # 增量更新
+├── references/                 # 参考文档
+│   ├── extraction_guide.md    # PDF 提取指南
+│   ├── chunking_strategies.md # 分块策略
+│   └── skill_template.md      # Skill 模板
+├── assets/                     # 资源文件
+└── evals/                      # 测试用例
 ```
 
-## Core Workflow
+## 核心工作流程
 
-1. **Extract**: Extract content from PDF using various engines (PyPDF2, pdfplumber, OCR)
-2. **Chunk**: Split content into semantic chunks with configurable strategies
-3. **Generate**: Create a reusable skill with query interface based on knowledge base
+1. **提取**：使用各种引擎（PyPDF2、pdfplumber、OCR）从 PDF 提取内容
+2. **分块**：使用可配置策略将内容分割成语义块
+3. **生成**：基于知识库创建具有查询接口的可复用 skill
 
-## Key Technologies
+## 关键技术
 
 - Python 3.8+
-- PDF extraction: PyPDF2, pdfplumber
-- OCR (optional): pdf2image, pytesseract
-- Data processing: openpyxl
+- PDF 提取：PyPDF2、pdfplumber
+- OCR（可选）：pdf2image、pytesseract
+- 数据处理：openpyxl
 
-## Generated Skill Structure
+## 生成的 Skill 结构
 
 ```
 my-knowledge-skill/
-├── SKILL.md                # Skill definition
-├── knowledge/              # Knowledge base
-│   ├── index.json         # Knowledge index
-│   └── chunks/            # Knowledge chunks
+├── SKILL.md                # Skill 定义
+├── knowledge/              # 知识库
+│   ├── index.json         # 知识索引
+│   └── chunks/            # 知识分块
 └── scripts/
-    └── query.py           # Query interface
+    └── query.py           # 查询接口
 ```
 
-## Development Guidelines
+## 开发指南
 
-- Maintain English for all documentation
-- Keep code comments in English
-- Follow existing code patterns in scripts/
-- Test changes before committing
-- Update AGENTS.md if project structure changes significantly
+- 所有文档保持英文
+- 代码注释保持英文
+- 遵循 scripts/ 中的现有代码模式
+- 提交前测试更改
+- 如果项目结构发生重大变化，更新 AGENTS.md
 
-## Repository
+## 仓库
 
 - GitHub: https://github.com/pyh-pan/knowledgebase-creator.git
-- Main branch: main
+- 主分支：main
 
-## Notes
+## 说明
 
-- This is a skill project for Claude/OhMyOpenCode
-- Generated skills are standalone and can be used independently
-- The project supports batch processing and incremental updates
+- 这是一个用于 Claude/OhMyOpenCode 的 skill 项目
+- 生成的 skill 是独立的，可以独立使用
+- 项目支持批量处理和增量更新

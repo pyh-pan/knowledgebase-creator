@@ -1,26 +1,26 @@
-# PDF知识提取器
+# PDF Knowledge Extractor
 
-自动提取PDF文档内容并构建可复用的知识库skill。
+Automatically extract content from PDF documents and build reusable knowledge base skills.
 
-## 功能特点
+## Features
 
-- 📄 **智能提取**：支持原生PDF和扫描件OCR
-- 🔧 **灵活分块**：多种分块策略（段落、语义、固定大小）
-- 🗃️ **知识管理**：结构化存储，支持增量更新
-- 🤖 **Skill生成**：自动生成可复用的查询skill
-- 📦 **批量处理**：支持多文档并行处理
+- 📄 **Smart Extraction**: Supports native PDFs and OCR for scanned documents
+- 🔧 **Flexible Chunking**: Multiple chunking strategies (paragraph, semantic, fixed size)
+- 🗃️ **Knowledge Management**: Structured storage with incremental updates support
+- 🤖 **Skill Generation**: Automatically generates reusable query skills
+- 📦 **Batch Processing**: Supports parallel processing of multiple documents
 
-## 安装
+## Installation
 
 ```bash
-# 克隆项目
+# Clone project
 git clone <repository-url>
 cd pdf-knowledge-skill
 
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
 
-# 可选：安装OCR依赖（用于扫描件）
+# Optional: Install OCR dependencies (for scanned documents)
 # Ubuntu/Debian
 sudo apt-get install tesseract-ocr tesseract-ocr-chi-sim
 
@@ -28,9 +28,9 @@ sudo apt-get install tesseract-ocr tesseract-ocr-chi-sim
 brew install tesseract tesseract-lang
 ```
 
-## 快速开始
+## Quick Start
 
-### 1. 提取PDF内容
+### 1. Extract PDF Content
 
 ```bash
 python scripts/extract.py \
@@ -39,7 +39,7 @@ python scripts/extract.py \
   --extract-tables
 ```
 
-### 2. 创建知识分块
+### 2. Create Knowledge Chunks
 
 ```bash
 python scripts/chunk.py \
@@ -49,40 +49,40 @@ python scripts/chunk.py \
   --overlap 200
 ```
 
-### 3. 生成Skill
+### 3. Generate Skill
 
 ```bash
 python scripts/generate_skill.py \
   --knowledge-dir "knowledge/" \
   --output "my-knowledge-skill/" \
   --skill-name "product-manual-assistant" \
-  --description "产品手册问答助手"
+  --description "Product manual Q&A assistant"
 ```
 
-## 使用场景
+## Usage Scenarios
 
-### 场景1：产品手册助手
+### Scenario 1: Product Manual Assistant
 
-将产品用户手册转化为问答机器人：
+Convert product user manuals into Q&A bots:
 
 ```bash
-# 1. 提取手册内容
+# 1. Extract manual content
 python scripts/extract.py -i "product_manual.pdf" -o "kb/"
 
-# 2. 分块
+# 2. Chunk
 python scripts/chunk.py -i "kb/raw_content.json" -o "kb/chunks/"
 
-# 3. 生成skill
+# 3. Generate skill
 python scripts/generate_skill.py \
   -k "kb/" \
   -o "product-qabot/" \
   -n "product-assistant" \
-  -d "产品使用问答助手"
+  -d "Product usage Q&A assistant"
 ```
 
-现在你可以使用生成的skill回答关于产品的问题。
+Now you can use the generated skill to answer questions about the product.
 
-### 场景2：批量处理法规文档
+### Scenario 2: Batch Processing Regulatory Documents
 
 ```bash
 python scripts/batch_process.py \
@@ -92,9 +92,9 @@ python scripts/batch_process.py \
   -n 4
 ```
 
-### 场景3：增量更新知识库
+### Scenario 3: Incremental Knowledge Base Updates
 
-当文档有更新时：
+When documents are updated:
 
 ```bash
 python scripts/update_knowledge.py \
@@ -103,51 +103,51 @@ python scripts/update_knowledge.py \
   --diff-mode
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 pdf-knowledge-skill/
-├── SKILL.md                 # Skill定义文件
-├── scripts/                 # 核心脚本
-│   ├── extract.py          # PDF提取
-│   ├── chunk.py            # 内容分块
-│   ├── generate_skill.py   # Skill生成
-│   ├── batch_process.py    # 批量处理
-│   └── update_knowledge.py # 增量更新
-├── references/             # 参考文档
-├── assets/                 # 资源文件
-└── evals/                  # 测试用例
+├── SKILL.md                 # Skill definition file
+├── scripts/                 # Core scripts
+│   ├── extract.py          # PDF extraction
+│   ├── chunk.py            # Content chunking
+│   ├── generate_skill.py   # Skill generation
+│   ├── batch_process.py    # Batch processing
+│   └── update_knowledge.py # Incremental updates
+├── references/             # Reference documents
+├── assets/                 # Resource files
+└── evals/                  # Test cases
 ```
 
-生成的Skill结构：
+Generated Skill structure:
 
 ```
 my-knowledge-skill/
-├── SKILL.md                # Skill定义
-├── knowledge/              # 知识库
-│   ├── index.json         # 知识索引
-│   └── chunks/            # 知识分块
+├── SKILL.md                # Skill definition
+├── knowledge/              # Knowledge base
+│   ├── index.json         # Knowledge index
+│   └── chunks/            # Knowledge chunks
 └── scripts/
-    └── query.py           # 查询接口
+    └── query.py           # Query interface
 ```
 
-## 详细文档
+## Detailed Documentation
 
-- [提取技术指南](references/extraction_guide.md)
-- [分块策略详解](references/chunking_strategies.md)
-- [Skill模板参考](references/skill_template.md)
+- [Extraction Technical Guide](references/extraction_guide.md)
+- [Chunking Strategies Details](references/chunking_strategies.md)
+- [Skill Template Reference](references/skill_template.md)
 
-## 依赖说明
+## Dependencies
 
-### 必需依赖
+### Required Dependencies
 - Python 3.8+
-- PyPDF2 或 pdfplumber（推荐）
+- PyPDF2 or pdfplumber (recommended)
 
-### 可选依赖
-- pdfplumber：更好的表格提取
-- pdf2image + pytesseract：OCR扫描件支持
-- openpyxl：Excel表格导出
+### Optional Dependencies
+- pdfplumber: Better table extraction
+- pdf2image + pytesseract: OCR support for scanned documents
+- openpyxl: Excel table export
 
-## 许可证
+## License
 
 MIT License
