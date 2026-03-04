@@ -1,0 +1,74 @@
+---
+name: pdf-knowledge-extractor
+display_name: PDF Knowledge Extractor
+description: Automatically extract content from PDF documents and build reusable knowledge base skills for Claude
+version: 1.0.0
+category: document-processing
+tags:
+  - pdf
+  - knowledge-base
+  - extraction
+  - rag
+  - document-processing
+  - claude
+  - skill
+author: pyh-pan
+license: MIT
+homepage: https://github.com/pyh-pan/knowledgebase-creator
+repository: https://github.com/pyh-pan/knowledgebase-creator
+issues: https://github.com/pyh-pan/knowledgebase-creator/issues
+
+# 兼容性
+claude_version: "."
+opencode_version: ">=1.0.0"
+
+# 依赖
+requirements:
+  - python>=3.8
+  - PyPDF2>=3.0.0
+  - pdfplumber>=0.10.0
+
+# 可选依赖
+optional_requirements:
+  - pdf2image>=1.16.0
+  - pytesseract>=0.3.10
+
+# 安装说明
+installation: |
+  ```bash
+  pip install -r requirements.txt
+  # Optional: OCR support
+  sudo apt-get install tesseract-ocr  # Ubuntu/Debian
+  brew install tesseract              # macOS
+  ```
+
+# 使用示例
+examples:
+  - name: Extract PDF and create knowledge base
+    description: Extract content from a PDF and generate a queryable skill
+    code: |
+      python scripts/extract.py -i "document.pdf" -o "knowledge/"
+      python scripts/chunk.py -i "knowledge/raw_content.json" -o "knowledge/chunks/"
+      python scripts/generate_skill.py -k "knowledge/" -o "my-skill/" -n "doc-assistant"
+
+# 功能特性
+features:
+  - Native PDF text extraction
+  - OCR support for scanned documents
+  - Table extraction
+  - Multiple chunking strategies (paragraph, semantic, fixed-size)
+  - Automatic skill generation
+  - Batch processing
+  - Incremental updates
+
+# 使用场景
+use_cases:
+  - Convert product manuals to Q&A bots
+  - Build research paper knowledge bases
+  - Create compliance guidance systems
+  - Organize training materials
+
+# 截图/演示（可选）
+# screenshots:
+#   - url: "..."
+#     alt: "..."
